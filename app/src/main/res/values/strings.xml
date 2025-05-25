@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">EastPower</string>
+    <string name="east_power">East Power</string>
+    <string name="brightness_locker_running">Brightness Locker Running</string>
+    <string name="brightness_locker_service">Brightness Locker Service</string>
+    <string name="stop">Stop</string>
+    <string name="notification_permission_is_required_to_run_the_service">Notification permission is required to run the service.</string>
+    <string name="need_to_disable_auto_brightness">You may need to disable auto brightness to use this service.</string>
+    <string name="system_settings_reminder">In order to make the service work properly, you may need to disable the battery optimization for this app and, additionally, for ColorOS users, you need to enable \"Auto-launch\" for this app in system settings so that the brightness can be set once receiving the screen-on broadcast.</string>
+    <string name="maximum_value_of_brightness">Maximum value of brightness</string>
+    <string name="current_brightness_value_on_slider">Current brightness value on slider：%1$s</string>
+    <string name="apply">Apply</string>
+    <string name="current_version">Current Version: %1$s</string>
+    <string name="author_dijia1124">Author: dijia1124 aka @goodnic</string>
+    <string name="source_code_repo">Source Code: https://github.com/dijia1124/EastPower</string>
+</resources>
