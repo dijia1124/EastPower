@@ -56,7 +56,7 @@ import kotlinx.coroutines.withContext
 @Composable
 fun BrightnessLocker(prefsRepo: PrefsRepository, innerPadding: PaddingValues) {
     val scope = rememberCoroutineScope()
-    val brightness by prefsRepo.brightnessFlow.collectAsState(initial = 2047)
+    val brightness by prefsRepo.brightnessFlow.collectAsState(initial = 4094)
     val context = LocalContext.current
     var isServiceOn by rememberSaveable { mutableStateOf(false) }
     var pendingWantOn by remember { mutableStateOf<Boolean?>(null) }

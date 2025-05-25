@@ -11,7 +11,7 @@ class PrefsRepository(context: Context) {
     companion object {
         private const val SETTINGS_NAME = "settings"
         private val KEY_BRIGHTNESS = intPreferencesKey("brightness")
-        private const val DEFAULT_BRIGHTNESS = 2047
+        private const val DEFAULT_BRIGHTNESS = 4094
         private val KEY_MAX_BRIGHTNESS = intPreferencesKey("max_brightness")
         private const val DEFAULT_MAX_BRIGHTNESS = 4094
 
