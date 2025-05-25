@@ -13,4 +13,5 @@
     <string name="current_version">Current Version: %1$s</string>
     <string name="author_dijia1124">Author: dijia1124 aka @goodnic</string>
     <string name="source_code_repo">Source Code: https://github.com/dijia1124/EastPower</string>
+    <string name="root_access_denied">Root access denied</string>
 </resources>

@@ -31,6 +31,7 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -46,7 +47,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
+import com.topjohnwu.superuser.Shell
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -62,6 +66,13 @@ fun BrightnessLocker(prefsRepo: PrefsRepository, innerPadding: PaddingValues) {
     val focusManager = LocalFocusManager.current
     val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
     val versionName = packageInfo.versionName
+    var hasRoot by rememberSaveable { mutableStateOf(false) }
+
+    LaunchedEffect(hasRoot) {
+        scope.launch {
+            hasRoot = hasRootAccess()
+        }
+    }
     val permissionLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { granted ->
@@ -69,7 +80,7 @@ fun BrightnessLocker(prefsRepo: PrefsRepository, innerPadding: PaddingValues) {
             if (granted) {
                 context.startForegroundService(
                     Intent(context, BrightnessLockerService::class.java)
-                        .apply { action = BrightnessLockerService.ACTION_APPLY }
+                        .apply { action = BrightnessLockerService.ACTION_START }
                 )
                 isServiceOn = true
             } else {
@@ -169,6 +180,15 @@ fun BrightnessLocker(prefsRepo: PrefsRepository, innerPadding: PaddingValues) {
             isOn = isServiceOn,
             onToggle = { wantOn ->
                 pendingWantOn = wantOn
+                if (hasRoot != true) {
+                    Toast
+                        .makeText(context,
+                            context.getString(R.string.root_access_denied), Toast.LENGTH_LONG)
+                        .show()
+                    isServiceOn = false
+                    pendingWantOn = null
+                    return@BrightnessServiceToggle
+                }
                 if (wantOn) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
                         ContextCompat.checkSelfPermission(
@@ -214,5 +234,13 @@ fun BrightnessServiceToggle(
             checked = isOn,
             onCheckedChange = onToggle
         )
+    }
+}
+
+suspend fun hasRootAccess(): Boolean = withContext(Dispatchers.IO) {
+    try {
+        Shell.cmd("su -c whoami").exec().isSuccess
+    } catch (e: Exception) {
+        false
     }
 }

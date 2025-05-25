@@ -14,4 +14,5 @@
     <string name="current_version">当前版本: %1$s</string>
     <string name="author_dijia1124">作者: dijia1124 akd @goodnic</string>
     <string name="source_code_repo">源码: https://github.com/dijia1124/EastPower</string>
+    <string name="root_access_denied">无法获取 Root 权限</string>
 </resources>
