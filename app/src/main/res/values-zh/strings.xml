@@ -6,7 +6,7 @@
     <string name="stop">停止</string>
     <string name="notification_permission_is_required_to_run_the_service">授予通知权限以便通知服务运行</string>
     <string name="need_to_disable_auto_brightness">你可能需要关闭系统的自动亮度。</string>
-    <string name="system_settings_reminder">为了亮度锁定服务正常运行，你可能需要把该App加入电池优化白名单/取消后台限制。另外，ColorOS用户需要打开这个App的“自启动”权限以便亮屏时及时受到广播设定亮度。</string>
+    <string name="system_settings_reminder">为了亮度锁定服务正常运行，你可能需要把该App加入电池优化白名单/取消后台限制。另外，ColorOS用户需要打开这个App的“自启动”权限以便亮屏时及时收到广播设定亮度。</string>
     <string name="maximum_value_of_brightness">最大亮度值</string>
     <string name="current_brightness_value_on_slider">当前滑动条所处亮度：%1$s</string>
     <string name="apply">应用</string>
