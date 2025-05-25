@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             EastPowerTheme {
                 Scaffold(
-                    topBar = {TopAppBar(title = {Text(text = stringResource(R.string.east_power), style = MaterialTheme.typography.headlineSmall)})},
+                    topBar = {TopAppBar(title = {Text(text = stringResource(R.string.app_name), style = MaterialTheme.typography.headlineSmall)})},
                     modifier = Modifier.fillMaxSize()) { innerPadding ->
                     BrightnessLocker(prefsRepo, innerPadding)
                 }

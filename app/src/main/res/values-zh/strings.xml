@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">东方力量</string>
-    <string name="east_power">东方力量</string>
-    <string name="brightness_locker_running">亮度锁定运行中</string>
-    <string name="brightness_locker_service">亮度锁定服务</string>
+    <string name="brightness_lock_running">亮度锁定运行中</string>
+    <string name="brightness_lock_service">亮度锁定服务</string>
     <string name="stop">停止</string>
     <string name="notification_permission_is_required_to_run_the_service">授予通知权限以便通知服务运行</string>
     <string name="need_to_disable_auto_brightness">你可能需要关闭系统的自动亮度。</string>

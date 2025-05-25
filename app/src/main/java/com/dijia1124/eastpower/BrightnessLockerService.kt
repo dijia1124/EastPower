@@ -70,7 +70,7 @@ class BrightnessLockerService : Service() {
             }
             ACTION_START -> {
                 if (updateJob?.isActive != true) {
-                    startForeground(NOTIF_ID, buildNotification(getString(R.string.brightness_locker_running)))
+                    startForeground(NOTIF_ID, buildNotification(getString(R.string.brightness_lock_running)))
                     startUpdating()
                 }
                 return START_STICKY
@@ -119,7 +119,7 @@ class BrightnessLockerService : Service() {
         val nm = getSystemService(NotificationManager::class.java)
         val chan = NotificationChannel(
             CHANNEL_ID,
-            getString(R.string.brightness_locker_service),
+            getString(R.string.brightness_lock_service),
             NotificationManager.IMPORTANCE_LOW
         )
         nm.createNotificationChannel(chan)
@@ -134,7 +134,7 @@ class BrightnessLockerService : Service() {
         )
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.light_mode_24dp_1f1f1f_fill1_wght400_grad200_opsz24)
-            .setContentTitle(getString(R.string.brightness_locker_service))
+            .setContentTitle(getString(R.string.brightness_lock_service))
             .setContentText(content)
             .addAction(R.drawable.light_mode_24dp_1f1f1f_fill1_wght400_grad200_opsz24,
                 getString(R.string.stop), stopPending)

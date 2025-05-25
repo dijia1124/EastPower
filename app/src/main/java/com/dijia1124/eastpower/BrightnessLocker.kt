@@ -229,7 +229,7 @@ fun BrightnessServiceToggle(
             .fillMaxWidth()
             .padding(16.dp)
     ) {
-        Text(stringResource(R.string.brightness_locker_service), modifier = Modifier.weight(1f))
+        Text(stringResource(R.string.brightness_lock_service), modifier = Modifier.weight(1f))
         Switch(
             checked = isOn,
             onCheckedChange = onToggle

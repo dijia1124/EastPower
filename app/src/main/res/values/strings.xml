@@ -1,8 +1,7 @@
 <resources>
-    <string name="app_name">EastPower</string>
-    <string name="east_power">East Power</string>
-    <string name="brightness_locker_running">Brightness Locker Running</string>
-    <string name="brightness_locker_service">Brightness Locker Service</string>
+    <string name="app_name">East Power</string>
+    <string name="brightness_lock_running">Brightness Lock Running</string>
+    <string name="brightness_lock_service">Brightness Lock Service</string>
     <string name="stop">Stop</string>
     <string name="notification_permission_is_required_to_run_the_service">Notification permission is required to run the service.</string>
     <string name="need_to_disable_auto_brightness">You may need to disable auto brightness to use this service.</string>
