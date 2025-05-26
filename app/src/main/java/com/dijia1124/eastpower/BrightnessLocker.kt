@@ -58,7 +58,7 @@ fun BrightnessLocker(prefsRepo: PrefsRepository, innerPadding: PaddingValues) {
     val scope = rememberCoroutineScope()
     val brightness by prefsRepo.brightnessFlow.collectAsState(initial = 4094)
     val context = LocalContext.current
-    var isServiceOn by rememberSaveable { mutableStateOf(false) }
+    val isServiceOn by prefsRepo.serviceRunningFlow.collectAsState(initial = false)
     var pendingWantOn by remember { mutableStateOf<Boolean?>(null) }
     val maxValue by prefsRepo.maxBrightnessFlow.collectAsState(initial = 4094)
     var maxValueText by rememberSaveable { mutableStateOf("") }
@@ -82,12 +82,10 @@ fun BrightnessLocker(prefsRepo: PrefsRepository, innerPadding: PaddingValues) {
                     Intent(context, BrightnessLockerService::class.java)
                         .apply { action = BrightnessLockerService.ACTION_START }
                 )
-                isServiceOn = true
             } else {
                 Toast.makeText(context,
                     context.getString(R.string.notification_permission_is_required_to_run_the_service),
                     Toast.LENGTH_SHORT).show()
-                isServiceOn = false
             }
         }
         pendingWantOn = null
@@ -185,7 +183,6 @@ fun BrightnessLocker(prefsRepo: PrefsRepository, innerPadding: PaddingValues) {
                         .makeText(context,
                             context.getString(R.string.root_access_denied), Toast.LENGTH_LONG)
                         .show()
-                    isServiceOn = false
                     pendingWantOn = null
                     return@BrightnessServiceToggle
                 }
@@ -202,7 +199,6 @@ fun BrightnessLocker(prefsRepo: PrefsRepository, innerPadding: PaddingValues) {
                             Intent(context, BrightnessLockerService::class.java)
                                 .apply { action = BrightnessLockerService.ACTION_START }
                         )
-                        isServiceOn = true
                         pendingWantOn = null
                     }
                 } else {
@@ -210,7 +206,6 @@ fun BrightnessLocker(prefsRepo: PrefsRepository, innerPadding: PaddingValues) {
                         Intent(context, BrightnessLockerService::class.java)
                             .apply { action = BrightnessLockerService.ACTION_STOP }
                     )
-                    isServiceOn = false
                     pendingWantOn = null
                 }
             }

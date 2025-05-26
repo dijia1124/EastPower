@@ -58,6 +58,7 @@ class BrightnessLockerService : Service() {
         when (intent?.action) {
             ACTION_STOP -> {
                 updateJob?.cancel()
+                scope.launch { prefs.setServiceRunning(false) }
                 stopSelf()
                 return START_NOT_STICKY
             }
@@ -70,6 +71,7 @@ class BrightnessLockerService : Service() {
             }
             ACTION_START -> {
                 if (updateJob?.isActive != true) {
+                    scope.launch { prefs.setServiceRunning(true) }
                     startForeground(NOTIF_ID, buildNotification(getString(R.string.brightness_lock_running)))
                     startUpdating()
                 }
@@ -82,6 +84,7 @@ class BrightnessLockerService : Service() {
     override fun onDestroy() {
         updateJob?.cancel()
         unregisterReceiver(screenReceiver)
+        scope.launch { prefs.setServiceRunning(false) }
         super.onDestroy()
     }
 
@@ -132,10 +135,21 @@ class BrightnessLockerService : Service() {
         val stopPending = PendingIntent.getService(
             this, 0, stopIntent, PendingIntent.FLAG_IMMUTABLE
         )
+        val applyIntent = Intent(this, BrightnessLockerService::class.java).apply {
+            action = ACTION_APPLY
+        }
+        val applyPending = PendingIntent.getService(
+            this, 1, applyIntent, PendingIntent.FLAG_IMMUTABLE
+        )
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.light_mode_24dp_1f1f1f_fill1_wght400_grad200_opsz24)
             .setContentTitle(getString(R.string.brightness_lock_service))
             .setContentText(content)
+            .addAction(
+                R.drawable.light_mode_24dp_1f1f1f_fill1_wght400_grad200_opsz24,
+                getString(R.string.apply),
+                applyPending
+            )
             .addAction(R.drawable.light_mode_24dp_1f1f1f_fill1_wght400_grad200_opsz24,
                 getString(R.string.stop), stopPending)
             .setOngoing(true)
