@@ -6,7 +6,7 @@ EastPower is a lightweight Android app designed to manually set the screen brigh
 
 - Manual Brightness Override: Instantly apply a user-defined brightness value.
 
-- Foreground Service: Runs as a background service to apply brightness on screen-on and pause on screen-off.
+- Foreground Service: Runs as a background service to apply brightness once on screen-on.
 
 - Device Compatibility: Tailored for OnePlus 13 and other devices using Qualcomm backlight controllers.
 
